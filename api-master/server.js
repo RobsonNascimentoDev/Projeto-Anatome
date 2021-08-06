@@ -107,7 +107,7 @@ app.delete('/peca/:_id', (req, res) => {
     Peca.findById(req.params._id, (err, peca) => {
         Roteiro.find({}, (err, roteiros) => {
             const achou = roteiros.filter(r => r.partes.some(id => peca.partes.indexOf(id) >= 0));
-
+        
             if(achou.length > 0){
                 const nomes = achou.map(r => r.nome).join(', ');
                 return res.status(500).send({status: 500, error: 'Não é possível excluir a peça, pois a mesma possui partes utilizadas nos roteiros '+nomes+'.'}); 
@@ -129,8 +129,6 @@ app.delete('/peca/:_id', (req, res) => {
         })         
     })
 });
-
-
 
 app.put('/peca/:id', (req, res) => {
     var peca = req.body;
@@ -160,9 +158,9 @@ app.put('/peca/:id', (req, res) => {
     })
 });
 
-
 //ROTEIRO
 app.get('/roteiro', (req, res) => {
+
     Roteiro.find({})
     .populate({ path: 'conteudos', populate: {path: 'partes'} })
     .populate({path: 'partes'}).lean().exec((err, roteiros) => {
@@ -189,12 +187,10 @@ app.get('/roteiro', (req, res) => {
 
                 return {...roteiro, pecasGenericas: Object.values(pecasAnatomp)}
             })       
-    
             return res.status(200).send({status: 200, data});
         });        
     });  
 });
-
 
 app.post('/roteiro', (req, res) => {
     const roteiro = new Roteiro(req.body)
@@ -228,7 +224,6 @@ app.put('/roteiro/:_id', (req, res) => {
         return res.status(200).send({status: 200, data: _roteiro});
     })
 });
-
 
 //AN@TOMP
 app.get('/anatomp', (req, res) => {
@@ -291,7 +286,6 @@ app.post('/anatomp', (req, res) => {
     });    
 });
 
-
 app.put('/anatomp/:id', (req, res) => {
     var anatomp = req.body;
     var pecasFisicas = req.body.pecasFisicas;
@@ -312,8 +306,6 @@ app.put('/anatomp/:id', (req, res) => {
     })
 });
 
-
-
 app.delete('/anatomp/:_id', (req, res) => {
     Anatomp.findByIdAndRemove(req.params._id, (err, _anatomp) => {
         if (err) return res.status(500).send({status: 500, error: err});
@@ -326,9 +318,6 @@ app.delete('/anatomp/:_id', (req, res) => {
         
     })
 });
-
-
-
 
 app.listen(process.env.PORT || 8080, () => {
     console.log("Ouvindo na porta 8080");
