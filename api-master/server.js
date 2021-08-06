@@ -220,8 +220,6 @@ app.delete('/roteiro/:_id', (req, res) => {
     })
 });
 
-
-
 app.put('/roteiro/:_id', (req, res) => {
     const roteiro = new Roteiro(req.body)
     Roteiro.findByIdAndUpdate(req.params._id, roteiro, (err, _roteiro) => {
@@ -335,3 +333,8 @@ app.delete('/anatomp/:_id', (req, res) => {
 app.listen(process.env.PORT || 8080, () => {
     console.log("Ouvindo na porta 8080");
 });
+
+// Bd Produção
+// MONGO_DB=mongodb+srv://admin:2zTDAgGtZrlLGUpL@anatome-api.u4nmw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+// Bd Local
+// MONGO_DB=mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false
