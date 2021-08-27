@@ -36,7 +36,9 @@ class FormItemApresentacaoPeca extends Component {
                     {this.props.name}
                 </div>
                 <div style={{ alignSelf: 'center' }}>
-                    {item.midias.map((t, idxMidia) => <Fragment key={t._id}><Midia file={t} idx={idxMidia} midias={item.midias} onChange={onChange('midias', idx)} /></Fragment>)}
+                    {item.midias.map((t, idxMidia) => <Fragment key={t._id}>
+                        <Midia file={t} idx={idxMidia} midias={item.midias} onChange={onChange('midias', idx)} />
+                        </Fragment>)}
                     {loading == item._id ? <Spin /> : null}
                 </div>
             </div>
@@ -50,6 +52,7 @@ class ApresentacaoPeca extends Component {
         sinalNovo: '',
         loading: false,
         open: false,
+        nome: '',
         toDelete: '',
         itens: this.props.defaultValue.length > 0 ? this.props.defaultValue : [getModelGeneralidade()]
     }
@@ -70,70 +73,27 @@ class ApresentacaoPeca extends Component {
 
     render() {
         const { loading, open, itens, sinalNovo } = this.state;
+        const { name } = this.props;
         return (
-            <Fragment>
-                <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                    <div style={{ marginRight: '10px' }}>
-                        <List
-                            rowKey='_id'
-                            size="small"
-                            bordered={true}
-                            locale={{ emptyText: 'Nenhuma generalidade adicionada' }}
-                            dataSource={itens}
-                            renderItem={(item, idx) => (
-                                <Item key={item._id} actions={[
-                                    <Upload showUploadList={false} onChange={this.onUpload(idx, item.midias)} beforeUpload={this.beforeUpload(item._id)}>
-                                        <Tooltip title='Adicionar mídia'>
-                                            <Button type='primary' ghost shape='circle' icon='paper-clip' disabled={loading} />
-                                        </Tooltip>
-                                    </Upload>,
-                                    <Tooltip title='Excluir'><Button type='primary' ghost onClick={this.setItem2Delete(idx)} icon='delete' shape='circle' /></Tooltip>
-                                ]}>
-                                    <FormItemApresentacaoPeca name={"Peça"} sinalNovo={sinalNovo} onEnter={this.onAdd} loading={loading} item={item} idx={idx} onChange={this.onChange} />
-                                </Item>)}
-                        />
-                    </div>
-                    <div style={{ marginRight: '10px' }}>
-                        <List
-                            rowKey='_id'
-                            size="small"
-                            bordered={true}
-                            locale={{ emptyText: 'Nenhuma generalidade adicionada' }}
-                            dataSource={itens}
-                            renderItem={(item, idx) => (
-                                <Item key={item._id} actions={[
-                                    <Upload showUploadList={false} onChange={this.onUpload(idx, item.midias)} beforeUpload={this.beforeUpload(item._id)}>
-                                        <Tooltip title='Adicionar mídia'>
-                                            <Button type='primary' ghost shape='circle' icon='paper-clip' disabled={loading} />
-                                        </Tooltip>
-                                    </Upload>,
-                                    <Tooltip title='Excluir'><Button type='primary' ghost onClick={this.setItem2Delete(idx)} icon='delete' shape='circle' /></Tooltip>
-                                ]}>
-                                    <FormItemApresentacaoPeca name={"Região"} sinalNovo={sinalNovo} onEnter={this.onAdd} loading={loading} item={item} idx={idx} onChange={this.onChange} />
-                                </Item>)}
-                        />
-                    </div>
-                    <div style={{ marginRight: '10px' }}>
-                        <List
-                            rowKey='_id'
-                            size="small"
-                            bordered={true}
-                            locale={{ emptyText: 'Nenhuma generalidade adicionada' }}
-                            dataSource={itens}
-                            renderItem={(item, idx) => (
-                                <Item key={item._id} actions={[
-                                    <Upload showUploadList={false} onChange={this.onUpload(idx, item.midias)} beforeUpload={this.beforeUpload(item._id)}>
-                                        <Tooltip title='Adicionar mídia'>
-                                            <Button type='primary' ghost shape='circle' icon='paper-clip' disabled={loading} />
-                                        </Tooltip>
-                                    </Upload>,
-                                    <Tooltip title='Excluir'><Button type='primary' ghost onClick={this.setItem2Delete(idx)} icon='delete' shape='circle' /></Tooltip>
-                                ]}>
-                                    <FormItemApresentacaoPeca name={"Sistema"} sinalNovo={sinalNovo} onEnter={this.onAdd} loading={loading} item={item} idx={idx} onChange={this.onChange} />
-                                </Item>)}
-                        />
-                    </div>
-                </div>
+            <Fragment >
+                <List style={{marginRight:"10px"}}
+                    rowKey='_id'
+                    size="small"
+                    bordered={true}
+                    locale={{ emptyText: 'Nenhuma generalidade adicionada' }}
+                    dataSource={itens}
+                    renderItem={(item, idx) => (
+                        <Item key={item._id} actions={[
+                            <Upload showUploadList={false} onChange={this.onUpload(idx, item.midias)} beforeUpload={this.beforeUpload(item._id)}>
+                                <Tooltip title='Adicionar mídia'>
+                                    <Button type='primary' ghost shape='circle' icon='paper-clip' disabled={loading} />
+                                </Tooltip>
+                            </Upload>,
+                            <Tooltip title='Excluir'><Button type='primary' ghost onClick={this.setItem2Delete(idx)} icon='delete' shape='circle' /></Tooltip>
+                        ]}>
+                            <FormItemApresentacaoPeca name={name} sinalNovo={sinalNovo} onEnter={this.onAdd} loading={loading} item={item} idx={idx} onChange={this.onChange} />
+                        </Item>)}
+                />
                 <Modal
                     title={'Excluir generalidade'}
                     visible={open}
@@ -245,7 +205,7 @@ const _style = {
         margin: 0,
         width: '100%'
     },
-    textos: { display: 'flex', alignItems: 'center', flexDirection: 'column', width: '70%', marginRight: 5 }
+    textos: { display: 'flex', alignItems: 'center', flexDirection: 'column', width: '100%', marginRight: 5 }
 }
 
 

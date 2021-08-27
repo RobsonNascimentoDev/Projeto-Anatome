@@ -1,12 +1,21 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, ReactDOM } from 'react';
 
-import { Form, Input, Button, Tag, Row, Col, Icon } from 'antd';
+import { Form, Input, Spin, Tag, Row, Col, Icon } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import Label from '../components/Label'
+import Label from '../components/Label';
+import Midia from '../components/Midia';
 
 const { v4: uuidv4 } = require('uuid');
 
 const FormItem = Form.Item;
+const firebase = window.firebase;
+const firebaseRef = firebase.storage().ref();
+
+const getModelGeneralidade = () => ({
+    _id: uuidv4(),
+    texto: '',
+    midias: [],
+})
 
 const props = {
     labelCol: {},
@@ -24,12 +33,13 @@ class FormPartes extends Component {
     }
 
     render() {
-        const { partes, onChangeParte, onRemoveParte, erros, somentePratica, form } = this.props;
+        const { partes, onChangeParte, onRemoveParte, erros } = this.props;
         const { string, tokens } = this.state;
+        const { item, idx, onChange, loading } = this.props;
 
         const _erros = {
             partes: erros.campos.indexOf('partes'),
-        }
+        };
 
         return (
             <Fragment>
@@ -69,6 +79,7 @@ class FormPartes extends Component {
                                                 textOverflow: 'ellipsis'
                                             }}>{item}</Tag>
                                         </Col>
+
                                     ))}
                                     {partes.length == 0 && tokens.length == 0 && 'Esta peça ainda não possui partes associadas'}
                                 </Row>
@@ -76,6 +87,7 @@ class FormPartes extends Component {
                         </Col>
                     </Row>
                 </Form>
+                
             </Fragment>
         )
     }
@@ -93,6 +105,7 @@ class FormPartes extends Component {
         const novas = tokens.map(nome => ({ _id: uuidv4(), nome }));
         onChange('partes')([...partes, ...novas])
     }
+
 }
 
 

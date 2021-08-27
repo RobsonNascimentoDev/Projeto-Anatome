@@ -9,11 +9,11 @@ const Option = Select.Option;
 
 const _tags = [
     //Tags de 1 a 10: Pessoas com defiiencia auditiva
-    { _id: "1", nome: 'Áudio em Português' },
-    { _id: "2", nome: 'Legenda em Português' },
+    // { _id: "1", nome: 'Áudio em Português' },
+    // { _id: "2", nome: 'Legenda em Português' },
     { _id: "3", nome: 'Vídeo em Libras' },
     { _id: "4", nome: 'Janela de intérprete' },
-    { _id: "5", nome: 'Audiodescrição' },
+    // { _id: "5", nome: 'Audiodescrição' },
 ]
 
 
@@ -68,7 +68,7 @@ const MidiaContent = ({ file, onChange, midias, idx }) => {
                 )}                
             </div>
             <div style={{ textAlign: 'center' }}>
-                <Button target="_blank" href={midias[idx].url}><Icon type="download" />Baixar</Button>
+                <Button target="_blank" href={midias[idx].url}><Icon type="download" />Assitir</Button>
                 {onChange && <Button onClick={() => onChange([
                         ...midias.slice(0, idx),
                         ...midias.slice(idx+1),

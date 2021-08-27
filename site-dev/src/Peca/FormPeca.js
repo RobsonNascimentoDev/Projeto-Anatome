@@ -3,7 +3,7 @@ import { Form, Button, Input, Select, Checkbox, Row, Col } from 'antd';
 import { filter } from '../utils/data';
 import Generalidades from '../components/Generalidades';
 import ApresentacaoPeca from '../components/ApresentacaoPeca';
-import { FaHandshake } from "@react-icons/all-files/fa/FaHandshake";
+import { FaHandPaper } from "@react-icons/all-files/fa/FaHandPaper";
 
 const Option = Select.Option;
 
@@ -72,13 +72,19 @@ const FormPeca = ({ nome, idioma, regiao, sistema, erros, somentePratica, listaS
                     </FormItem>
                 </Col>
                 <Col span={24}>
-                    <FormItem style={{ width: "100%", display:"flex", justifyContent:"center" }}>
-                        <span style={{ display: "flex", justifyContent: "space-evenly", bottom: "0" }}>
-                            Sessão Libras
-                            <FaHandshake style={{ width:"34px", height:"36px", paddingBottom:"14px", color:"#1890ff" }} />
-                        </span>
-                        <ApresentacaoPeca defaultValue={midiaLibras} onOpenSnackBar={onOpenSnackbar} onChange={onChange('generalidades')} />
-                    </FormItem>
+                    <div style={{border:"1px solid #e8e8e8", borderRadius:"5px", paddingTop:"15px", marginBottom:"20px"}}>
+                        <FormItem style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+                            <span style={{ display: "flex", justifyContent: "space-evenly"}}>
+                                <strong>Conteúdo da Peça em Libras</strong>
+                                <FaHandPaper style={{ width: "34px", height: "36px", paddingBottom: "14px", color: "#1890ff" }} />
+                            </span>
+                        <div style={{ display: 'flex', justifyContent: 'space-evenly', height: '50%', marginBottom: '1px' }}>
+                                <ApresentacaoPeca defaultValue={midiaLibras} name={"Nome da Peça"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('generalidades')} />
+                                <ApresentacaoPeca defaultValue={midiaLibras} name={"Região"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('generalidades')} />
+                                <ApresentacaoPeca defaultValue={midiaLibras} name={"Sistema"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('generalidades')} />
+                            </div>
+                        </FormItem>
+                    </div>
                 </Col>
                 <Col span={24}>
                     <FormItem label="Informe as generalidades do conteúdo da peça">

@@ -98,7 +98,6 @@ class Peca extends Component {
         const { model, options, erros, open, pendencias, somentePratica } = this.state;
         const {loading} = this.props;
 
-        console.log("cheguei aquii...")
 
         const title = this.props.modo == 'assoc' ? false : (this.props.match.params.id ? 'Alteração do conteúdo da peça' : 'Cadastro de conteúdo da peça')
         return (
