@@ -1,16 +1,10 @@
 import React, { Component, Fragment } from 'react';
-
 import { Collapse, Button, Modal, List, Icon } from 'antd';
-
 import { listaIdiomas, listaRegiao, listaSistema } from '../utils/mock'
-
 import { request, Maybe } from '../utils/data'
-
 import FormPeca from './FormPeca'
 import FormPartes from './FormPartes';
 import FormTeoria from './FormTeoria';
-
-
 import Header from '../components/Header'
 import { withAppContext } from '../context';
 
@@ -25,7 +19,6 @@ const getModelConteudoTeorico = () => ({
     plural: '',
     singular: ''
 })
-
 
 class Peca extends Component {
 
@@ -105,6 +98,8 @@ class Peca extends Component {
         const { model, options, erros, open, pendencias, somentePratica } = this.state;
         const {loading} = this.props;
 
+        console.log("cheguei aquii...")
+
         const title = this.props.modo == 'assoc' ? false : (this.props.match.params.id ? 'Alteração do conteúdo da peça' : 'Cadastro de conteúdo da peça')
         return (
             <div style={{padding: title ? 24 : 0}}>
@@ -148,22 +143,17 @@ class Peca extends Component {
         )
     }
      
-
     onChangeSomentePratica = somentePratica => this.setState({somentePratica})
 
     onClose = () => this.setState({open: false})
 
     onCheckPendencias = () => {
-        const { conteudoTeorico, partes } = this.state.model;
-
+        const { conteudoTeorico, partes } = this.state.model
         const pt = partes.map(p => p._id);
         const ctFlat = [].concat.apply([], conteudoTeorico.map(ct => ct.partes));
         const ctUnique = ctFlat.filter((item, pos) => ctFlat.indexOf(item) == pos);
-
         const ids = pt.filter(i => ctUnique.indexOf(i) < 0);
-
         const pendencias = partes.filter(p => ids.indexOf(p._id) != -1);
-
         this.setState({ pendencias, open: true })
     }
 
@@ -203,9 +193,6 @@ class Peca extends Component {
                 }
             })
         }
-
-
-
     }
 
     onChangeParte = (idx, nome) => {

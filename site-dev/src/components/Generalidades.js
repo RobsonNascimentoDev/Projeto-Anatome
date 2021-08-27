@@ -49,8 +49,6 @@ FormItemGeneralidade.defaultProps = {
     placeholder: 'Generalidades'
 }
 
-
-
 class Generalidades extends Component {
 
     state = {
@@ -60,7 +58,6 @@ class Generalidades extends Component {
         toDelete: '',
         itens: this.props.defaultValue.length > 0 ? this.props.defaultValue : [getModelGeneralidade()]
     }
-
 
     componentWillReceiveProps(next) {
         if (this.props.defaultValue.length == 0 && next.defaultValue.length > 0) {

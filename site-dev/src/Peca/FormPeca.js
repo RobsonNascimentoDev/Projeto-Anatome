@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
-
-import { Form, Input, Select, Checkbox, Row, Col } from 'antd';
-import { filter } from '../utils/data'
-import Generalidades from '../components/Generalidades'
+import { Form, Button, Input, Select, Checkbox, Row, Col } from 'antd';
+import { filter } from '../utils/data';
+import Generalidades from '../components/Generalidades';
+import ApresentacaoPeca from '../components/ApresentacaoPeca';
+import { FaHandshake } from "@react-icons/all-files/fa/FaHandshake";
 
 const Option = Select.Option;
 
@@ -13,7 +14,7 @@ const props = {
     wrapperCol: { span: 14 },
 }
 
-const FormPeca = ({ nome, idioma, regiao, sistema, erros, somentePratica, listaSistema, listaRegiao, onOpenSnackbar, onChange, onChangeSomentePratica, generalidades }) => {
+const FormPeca = ({ nome, idioma, regiao, sistema, erros, somentePratica, listaSistema, listaRegiao, onOpenSnackbar, onChange, onChangeSomentePratica, midiaLibras, generalidades }) => {
 
     const _erros = {
         nome: erros.campos.indexOf('nome'),
@@ -71,17 +72,26 @@ const FormPeca = ({ nome, idioma, regiao, sistema, erros, somentePratica, listaS
                     </FormItem>
                 </Col>
                 <Col span={24}>
+                    <FormItem style={{ width: "100%", display:"flex", justifyContent:"center" }}>
+                        <span style={{ display: "flex", justifyContent: "space-evenly", bottom: "0" }}>
+                            Sessão Libras
+                            <FaHandshake style={{ width:"34px", height:"36px", paddingBottom:"14px", color:"#1890ff" }} />
+                        </span>
+                        <ApresentacaoPeca defaultValue={midiaLibras} onOpenSnackBar={onOpenSnackbar} onChange={onChange('generalidades')} />
+                    </FormItem>
+                </Col>
+                <Col span={24}>
                     <FormItem label="Informe as generalidades do conteúdo da peça">
                         <Generalidades defaultValue={generalidades} onOpenSnackBar={onOpenSnackbar} onChange={onChange('generalidades')} />
                     </FormItem>
-                </Col>                
+                </Col>
                 <Col span={24}>
                     <FormItem>
                         <Checkbox checked={somentePratica} onChange={e => onChangeSomentePratica(e.target.checked)}>Somente conteúdo prático</Checkbox>
                     </FormItem>
                 </Col>
             </Row>
-        </Form>
+        </Form >
     )
 }
 

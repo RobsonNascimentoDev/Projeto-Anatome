@@ -48,7 +48,7 @@ class App extends Component {
                         <Route exact path="/login" component={TelaLogin} />
 
                     </Switch>
-            <Redirect to='/login' />
+            {/* <Redirect to='/login' /> */}
             </AppContext.Provider>
         )
     }

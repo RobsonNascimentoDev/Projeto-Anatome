@@ -66,7 +66,7 @@ const CardRespostaEdit = ({res,style,edit,onEdit,onTrash}) => {
                         <div style={{flex:0.15}}> </div>
                         <div style={{flex:2}}><hr/></div>
                     </div>
-                    <div><Input.TextArea 
+                    <div><Input.autoSize 
                         value={d} 
                         onChange={ 
                             ({target}) => edit(

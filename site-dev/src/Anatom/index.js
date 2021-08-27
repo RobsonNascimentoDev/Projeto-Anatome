@@ -398,7 +398,7 @@ class Main extends Component {
                     </Panel>
                 </Collapse>
                 <Modal
-                    title={`Excluir ${resourceToDelete == 'anatomp' ? 'roteiro setado' : 'conteúdo do roteiro'}`}
+                    title={`Excluir ${resourceToDelete === 'anatomp' ? 'roteiro setado' : 'conteúdo do roteiro'}`}
                     visible={open}
                     okText='Excluir'
                     onOk={this.onDelete}
@@ -417,7 +417,7 @@ class Main extends Component {
         const { toDelete, resourceToDelete } = this.state;
         if (toDelete !== null) {
             return <div>Deseja realmente excluir
-                o {resourceToDelete == 'anatomp' ? 'roteiro setado' : 'conteúdo do roteiro'} <span
+                o {resourceToDelete === 'anatomp' ? 'roteiro setado' : 'conteúdo do roteiro'} <span
                     style={{ fontWeight: 'bold' }}>{toDelete.nome}</span>?</div>
         } else {
             return null;
@@ -441,7 +441,7 @@ class Main extends Component {
 
                 const rots = roteiros.data.map(d => ({
                     ...d,
-                    idioma: listaIdiomas.find(s => s._id == d.idioma),
+                    idioma: listaIdiomas.find(s => s._id === d.idioma),
                 }));
                 this.setState({
                     anatomp: anatomp.data,
@@ -469,11 +469,11 @@ class Main extends Component {
         const model = this.state.resourceToDelete;
         const id = this.state.toDelete._id;
 
-        const nome = model == 'roteiro' ? 'Conteúdo do roteiro' : 'Roteiro setado';
+        const nome = model === 'roteiro' ? 'Conteúdo do roteiro' : 'Roteiro setado';
 
         request(model + '/' + id, { method: 'DELETE' })
             .then(ret => {
-                if (ret.status == 200) {
+                if (ret.status === 200) {
                     this.props.onOpenSnackbar(nome + ' excluído com sucesso!', 'success');
                     this.onGetData();
                 } else {
@@ -481,7 +481,7 @@ class Main extends Component {
                 }
             })
             .catch(e => {
-                const msg = typeof e == 'string' ? e : 'Não foi possível excluir o ' + nome.toLowerCase() + ' selecionado';
+                const msg = typeof e === 'string' ? e : 'Não foi possível excluir o ' + nome.toLowerCase() + ' selecionado';
                 this.props.onOpenSnackbar(msg);
             })
             .finally(() => {
@@ -498,10 +498,10 @@ class Main extends Component {
 
         const _list = list.filter(p => {
             return (
-                norm(p.nome).indexOf(_val) != -1 ||
-                norm(p.instituicao).indexOf(_val) != -1 ||
-                norm(p.roteiro.curso).indexOf(_val) != -1 ||
-                norm(p.roteiro.disciplina).indexOf(_val) != -1
+                norm(p.nome).indexOf(_val) !== -1 ||
+                norm(p.instituicao).indexOf(_val) !== -1 ||
+                norm(p.roteiro.curso).indexOf(_val) !== -1 ||
+                norm(p.roteiro.disciplina).indexOf(_val) !== -1
             )
         });
 
@@ -515,9 +515,9 @@ class Main extends Component {
 
         const _list = list.filter(p => {
             return (
-                norm(p.nome).indexOf(_val) != -1 ||
-                norm(p.curso).indexOf(_val) != -1 ||
-                norm(p.disciplina).indexOf(_val) != -1
+                norm(p.nome).indexOf(_val) !== -1 ||
+                norm(p.curso).indexOf(_val) !== -1 ||
+                norm(p.disciplina).indexOf(_val) !== -1
             )
         });
 

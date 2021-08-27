@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react';
 
-import { List, Modal, Tooltip, Button, Select, Input, Icon, Upload, Spin } from 'antd'
+import { List, Modal, Tooltip, Button, Select, Input, Icon, Upload, Spin, Form } from 'antd'
 
-import Midia from '../components/Midia'
+import Midia from './Midia'
 
 const { v4: uuidv4 } = require('uuid');
 
 const { Item } = List;
+const FormItem = Form.Item;
 
 const firebase = window.firebase;
 const firebaseRef = firebase.storage().ref();
@@ -17,24 +18,22 @@ const getModelGeneralidade = () => ({
     midias: [],
 })
 
-
-
-class FormItemGeneralidade extends Component {
+class FormItemApresentacaoPeca extends Component {
 
     ref = null;
 
     componentDidMount() {
-        if(this.props.sinalNovo != ''){
+        if (this.props.sinalNovo != '') {
             this.ref.focus()
         }
     }
 
     render() {
-        const { item, idx, onChange, loading, onEnter, placeholder } = this.props;
+        const { item, idx, onChange, loading } = this.props;
         return (
             <div style={_style.item}>
                 <div style={_style.textos}>
-                    <Input ref={r => this.ref = r} onPressEnter={onEnter} value={item.texto} onChange={e => onChange('texto', idx)(e.target.value)} placeholder={placeholder} />
+                    {this.props.name}
                 </div>
                 <div style={{ alignSelf: 'center' }}>
                     {item.midias.map((t, idxMidia) => <Fragment key={t._id}><Midia file={t} idx={idxMidia} midias={item.midias} onChange={onChange('midias', idx)} /></Fragment>)}
@@ -45,13 +44,7 @@ class FormItemGeneralidade extends Component {
     }
 }
 
-FormItemGeneralidade.defaultProps = {
-    placeholder: 'Generalidades'
-}
-
-
-
-class Generalidades extends Component {
+class ApresentacaoPeca extends Component {
 
     state = {
         sinalNovo: '',
@@ -75,32 +68,71 @@ class Generalidades extends Component {
         }
     }
 
-
     render() {
         const { loading, open, itens, sinalNovo } = this.state;
-
         return (
             <Fragment>
-                <List
-                    rowKey='_id'
-                    size="small"
-                    bordered={true}
-                    locale={{ emptyText: 'Nenhuma generalidade adicionada' }}
-                    dataSource={itens}
-                    renderItem={(item, idx) => (
-                        <Item key={item._id} actions={[
-                            <Upload showUploadList={false} onChange={this.onUpload(idx, item.midias)} beforeUpload={this.beforeUpload(item._id)}>
-                                <Tooltip title='Adicionar mídia'>
-                                    <Button type='primary' ghost shape='circle' icon='paper-clip' disabled={loading} />
-                                </Tooltip>
-                            </Upload>,
-                            <Tooltip title='Excluir'><Button type='primary' ghost onClick={this.setItem2Delete(idx)} icon='delete' shape='circle' /></Tooltip>
-                        ]}>
-                            <FormItemGeneralidade placeholder={this.props.placeholder} sinalNovo={sinalNovo} onEnter={this.onAdd} loading={loading} item={item} idx={idx} onChange={this.onChange} />
-                        </Item>)}
-                />
-                <div style={{ marginTop: 5, textAlign: 'right' }}>
-                    <Button ghost type='primary' disabled={loading} style={{ marginRight: 5 }} onClick={this.onAdd}><Icon type="plus" />Adicionar</Button>
+                <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                    <div style={{ marginRight: '10px' }}>
+                        <List
+                            rowKey='_id'
+                            size="small"
+                            bordered={true}
+                            locale={{ emptyText: 'Nenhuma generalidade adicionada' }}
+                            dataSource={itens}
+                            renderItem={(item, idx) => (
+                                <Item key={item._id} actions={[
+                                    <Upload showUploadList={false} onChange={this.onUpload(idx, item.midias)} beforeUpload={this.beforeUpload(item._id)}>
+                                        <Tooltip title='Adicionar mídia'>
+                                            <Button type='primary' ghost shape='circle' icon='paper-clip' disabled={loading} />
+                                        </Tooltip>
+                                    </Upload>,
+                                    <Tooltip title='Excluir'><Button type='primary' ghost onClick={this.setItem2Delete(idx)} icon='delete' shape='circle' /></Tooltip>
+                                ]}>
+                                    <FormItemApresentacaoPeca name={"Peça"} sinalNovo={sinalNovo} onEnter={this.onAdd} loading={loading} item={item} idx={idx} onChange={this.onChange} />
+                                </Item>)}
+                        />
+                    </div>
+                    <div style={{ marginRight: '10px' }}>
+                        <List
+                            rowKey='_id'
+                            size="small"
+                            bordered={true}
+                            locale={{ emptyText: 'Nenhuma generalidade adicionada' }}
+                            dataSource={itens}
+                            renderItem={(item, idx) => (
+                                <Item key={item._id} actions={[
+                                    <Upload showUploadList={false} onChange={this.onUpload(idx, item.midias)} beforeUpload={this.beforeUpload(item._id)}>
+                                        <Tooltip title='Adicionar mídia'>
+                                            <Button type='primary' ghost shape='circle' icon='paper-clip' disabled={loading} />
+                                        </Tooltip>
+                                    </Upload>,
+                                    <Tooltip title='Excluir'><Button type='primary' ghost onClick={this.setItem2Delete(idx)} icon='delete' shape='circle' /></Tooltip>
+                                ]}>
+                                    <FormItemApresentacaoPeca name={"Região"} sinalNovo={sinalNovo} onEnter={this.onAdd} loading={loading} item={item} idx={idx} onChange={this.onChange} />
+                                </Item>)}
+                        />
+                    </div>
+                    <div style={{ marginRight: '10px' }}>
+                        <List
+                            rowKey='_id'
+                            size="small"
+                            bordered={true}
+                            locale={{ emptyText: 'Nenhuma generalidade adicionada' }}
+                            dataSource={itens}
+                            renderItem={(item, idx) => (
+                                <Item key={item._id} actions={[
+                                    <Upload showUploadList={false} onChange={this.onUpload(idx, item.midias)} beforeUpload={this.beforeUpload(item._id)}>
+                                        <Tooltip title='Adicionar mídia'>
+                                            <Button type='primary' ghost shape='circle' icon='paper-clip' disabled={loading} />
+                                        </Tooltip>
+                                    </Upload>,
+                                    <Tooltip title='Excluir'><Button type='primary' ghost onClick={this.setItem2Delete(idx)} icon='delete' shape='circle' /></Tooltip>
+                                ]}>
+                                    <FormItemApresentacaoPeca name={"Sistema"} sinalNovo={sinalNovo} onEnter={this.onAdd} loading={loading} item={item} idx={idx} onChange={this.onChange} />
+                                </Item>)}
+                        />
+                    </div>
                 </div>
                 <Modal
                     title={'Excluir generalidade'}
@@ -112,30 +144,10 @@ class Generalidades extends Component {
                     okButtonProps={{ loading }}
                     cancelButtonProps={{ loading }}
                 >
-                    {this.getBody()}
                 </Modal>
             </Fragment>
         )
     }
-
-
-    getBody = () => {
-        const { toDelete, itens } = this.state;
-
-        if (toDelete !== '') {
-            return (
-                <div>
-                    <p>Deseja realmente excluir a generalidade:</p>
-                    <ul>
-                        {itens[toDelete].texto && <li>{itens[toDelete].texto}</li>}
-                    </ul>
-                </div>
-            )
-        } else {
-            return null
-        }
-    }
-
 
     setItem2Delete = idx => () => this.setState({ open: true, toDelete: idx })
 
@@ -237,8 +249,8 @@ const _style = {
 }
 
 
-Generalidades.defaultProps = {
+ApresentacaoPeca.defaultProps = {
     defaultValue: [getModelGeneralidade()]
 }
 
-export default Generalidades;
+export default ApresentacaoPeca;
