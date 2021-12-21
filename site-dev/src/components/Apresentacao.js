@@ -18,7 +18,7 @@ const getModelGeneralidade = () => ({
     midias: [],
 })
 
-class FormItemApresentacaoPeca extends Component {
+class FormItemApresentacao extends Component {
 
     ref = null;
 
@@ -46,7 +46,7 @@ class FormItemApresentacaoPeca extends Component {
     }
 }
 
-class ApresentacaoPeca extends Component {
+class Apresentacao extends Component {
 
     state = {
         sinalNovo: '',
@@ -91,7 +91,7 @@ class ApresentacaoPeca extends Component {
                             </Upload>,
                             <Tooltip title='Excluir'><Button type='primary' ghost onClick={this.setItem2Delete(idx)} icon='delete' shape='circle' /></Tooltip>
                         ]}>
-                            <FormItemApresentacaoPeca name={name} sinalNovo={sinalNovo} onEnter={this.onAdd} loading={loading} item={item} idx={idx} onChange={this.onChange} />
+                            <FormItemApresentacao name={name} sinalNovo={sinalNovo} onEnter={this.onAdd} loading={loading} item={item} idx={idx} onChange={this.onChange} />
                         </Item>)}
                 />
                 <Modal
@@ -209,8 +209,8 @@ const _style = {
 }
 
 
-ApresentacaoPeca.defaultProps = {
+Apresentacao.defaultProps = {
     defaultValue: [getModelGeneralidade()]
 }
 
-export default ApresentacaoPeca;
+export default Apresentacao;

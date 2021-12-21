@@ -13,6 +13,11 @@ import Header from '../components/Header';
 
 import { onSave as onSaveAnatomp } from '../Anatomp/utils';
 
+import Apresentacao from '../components/Apresentacao';
+import { FaHandPaper } from "@react-icons/all-files/fa/FaHandPaper";
+import Generalidades from '../components/Generalidades';
+
+
 const { v4: uuidv4 } = require('uuid');
 const Panel = Collapse.Panel;
 const Item = List.Item;
@@ -170,6 +175,20 @@ class Anatomp extends Component {
                             isEdit={Maybe(match).bind(m => m.params).bind(p => p.id).maybe(false, i => true)}
                             onSelectRoteiro={this.onSelectRoteiro}
                         />
+                        <div style={{ border: "1px solid #e8e8e8", borderRadius: "5px", paddingTop: "15px", marginBottom: "20px" }}>
+                            <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+                                <span style={{ display: "flex", justifyContent: "space-evenly" }}>
+                                    <strong>Informações Gerais do Roteiro em Libras</strong>
+                                    <FaHandPaper style={{ width: "34px", height: "36px", paddingBottom: "14px", color: "#1890ff" }} />
+                                </span>
+                                <div style={{ display: 'flex', justifyContent: 'space-evenly', height: '50%', marginBottom: '1px' }}>
+                                    <Apresentacao name={"Nome da Roteiro"} onChange={onChange('generalidades')} />
+                                    <Apresentacao name={"Curso"} onChange={onChange('generalidades')} />
+                                    <Apresentacao name={"Disciplina"} onChange={onChange('generalidades')} />
+                                </div>
+                            </div>
+                        </div>
+
                     </Panel>
                     <Panel className='anatome-panel' header={<Header loading={loading} error={this.checkError(['pecasFisicas'])} contentQ={<p>...</p>} title="Inclusão das informações das peças anatômicas físicas" />} key='pecaFisica'>
                         <FormPecasFisicas

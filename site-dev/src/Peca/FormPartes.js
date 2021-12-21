@@ -4,6 +4,10 @@ import { Form, Input, Spin, Tag, Row, Col, Icon } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import Label from '../components/Label';
 import Midia from '../components/Midia';
+import Apresentacao from '../components/Apresentacao';
+import { FaHandPaper } from "@react-icons/all-files/fa/FaHandPaper";
+
+
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -27,15 +31,17 @@ class FormPartes extends Component {
     state = {
         string: '',
         tokens: [],
+        midias: [],
     }
 
     componentWillReceiveProps(next) {
     }
 
     render() {
+
         const { partes, onChangeParte, onRemoveParte, erros } = this.props;
         const { string, tokens } = this.state;
-        const { item, idx, onChange, loading } = this.props;
+        const { nomePartes, idx, onChange, loading } = this.props;
 
         const _erros = {
             partes: erros.campos.indexOf('partes'),
@@ -87,7 +93,29 @@ class FormPartes extends Component {
                         </Col>
                     </Row>
                 </Form>
-                
+                <Col>
+                    <div style={{ justifyContent: 'center', border: "1px solid #e8e8e8", borderRadius: "5px", paddingTop: "15px", margin: "0px 18px 20px 18px" }}>
+                        <Label style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+                            <span style={{ width: '100%', display: "flex", justifyContent: "space-around" }}>
+                                <strong>Conteúdo da Peça em Libras</strong>
+                                <FaHandPaper style={{ width: "34px", height: "36px", paddingBottom: "14px", color: "#1890ff" }} />
+                            </span>
+                        </Label>
+                    </div>
+                </Col>
+                <Label>
+                    <div onBlur={this.partesLibras} style={{ flexDirection:'center', justifyContent: 'space-evenly', height: '50%', marginBottom: '1px' }}>
+                        {partes.map((p, idx) => {
+                            return (
+                                <Col span={5} key={p._id}>
+                                    <Label style={{width:'100%', marginLeft:'40%'}}>
+                                        <Apresentacao name={p.nome} onChange={onChange('generalidades')} />
+                                    </Label>
+                                </Col>
+                            )
+                        })}
+                    </div>
+                </Label>
             </Fragment>
         )
     }
@@ -99,13 +127,16 @@ class FormPartes extends Component {
     }
 
     gerar = () => {
-        const { onChange, partes } = this.props;
-        const { tokens } = this.state;
+        const { onChange, partes, idx, item } = this.props;
+        const { tokens, midias } = this.state;
         this.setState({ tokens: [], string: '' })
         const novas = tokens.map(nome => ({ _id: uuidv4(), nome }));
         onChange('partes')([...partes, ...novas])
     }
 
+    partesLibras = () => {
+        console.log("cheguei")
+    }
 }
 
 
