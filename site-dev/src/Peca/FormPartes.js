@@ -60,18 +60,25 @@ class FormPartes extends Component {
                                 <TextArea onBlur={this.gerar} autosize id='partesTextArea' placeholder="Cada nome deve estar em uma linha" value={string} onChange={this.onChange} />
                             </FormItem>
                             <FormItem>
+                                <Col>
+                                    <div style={{ justifyContent: 'center', border: "1px solid #e8e8e8", borderRadius: "5px", paddingTop: "15px", margin: "0px 18px 20px 18px" }}>
+                                        <Label style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+                                            <span style={{ width: '100%', display: "flex", justifyContent: "space-around" }}>
+                                                <strong>Conteúdo da Peça em Libras</strong>
+                                                <FaHandPaper style={{ width: "34px", height: "36px", paddingBottom: "14px", color: "#1890ff" }} />
+                                            </span>
+                                        </Label>
+                                    </div>
+                                </Col>
                                 <Row>
                                     {partes.map((p, idx) => {
                                         return (
                                             <Col span={6} key={p._id} style={{ padding: 5, display: 'flex' }}>
-                                                <Input
-                                                    style={{ height: 22 }}
-                                                    size='small'
-                                                    value={p.nome}
-                                                    suffix={<Icon style={{ marginTop: 4, cursor: 'pointer' }} type="close" onClick={onRemoveParte(p._id)} />}
-                                                    onChange={e => onChangeParte(idx, e.target.value)}
+                                                <Apresentacao name={p.nome}
+                                                    defaultValue={p}
+                                                    onChange={onChange('generalidades')}
                                                 />
-                                            </Col>
+                                            </Col>               
                                         )
                                     })}
                                     {tokens.map((item, idx) => (
@@ -93,29 +100,24 @@ class FormPartes extends Component {
                         </Col>
                     </Row>
                 </Form>
-                <Col>
-                    <div style={{ justifyContent: 'center', border: "1px solid #e8e8e8", borderRadius: "5px", paddingTop: "15px", margin: "0px 18px 20px 18px" }}>
-                        <Label style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-                            <span style={{ width: '100%', display: "flex", justifyContent: "space-around" }}>
-                                <strong>Conteúdo da Peça em Libras</strong>
-                                <FaHandPaper style={{ width: "34px", height: "36px", paddingBottom: "14px", color: "#1890ff" }} />
-                            </span>
-                        </Label>
-                    </div>
-                </Col>
-                <Label>
-                    <div onBlur={this.partesLibras} style={{ flexDirection:'center', justifyContent: 'space-evenly', height: '50%', marginBottom: '1px' }}>
+
+                {/* <Label>
+                    <div onBlur={this.partesLibras} style={{ flexDirection: 'center', justifyContent: 'space-evenly', height: '50%', marginBottom: '1px' }}>
                         {partes.map((p, idx) => {
+                            console.log(p)
                             return (
                                 <Col span={5} key={p._id}>
-                                    <Label style={{width:'100%', marginLeft:'40%'}}>
-                                        <Apresentacao name={p.nome} onChange={onChange('generalidades')} />
+                                    <Label style={{ width: '100%', marginLeft: '40%' }}>
+                                        <Apresentacao name={p.nome}
+                                            defaultValue={p}
+                                            onChange={onChange('generalidades')}
+                                        />
                                     </Label>
                                 </Col>
                             )
                         })}
                     </div>
-                </Label>
+                </Label> */}
             </Fragment>
         )
     }

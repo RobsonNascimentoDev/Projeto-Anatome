@@ -83,8 +83,9 @@ class Apresentacao extends Component {
                     locale={{ emptyText: 'Nenhuma generalidade adicionada' }}
                     dataSource={itens}
                     renderItem={(item, idx) => (
+                        console.log(item),
                         <Item key={item._id} actions={[
-                            <Upload showUploadList={false} onChange={this.onUpload(idx, item.midias)} beforeUpload={this.beforeUpload(item._id)}>
+                            <Upload showUploadList={false} onChange={this.onUpload(item._id, item.midias)} beforeUpload={this.beforeUpload(item._id)}>
                                 <Tooltip title='Adicionar mídia'>
                                     <Button type='primary' ghost shape='circle' icon='paper-clip' disabled={loading} />
                                 </Tooltip>
@@ -159,6 +160,7 @@ class Apresentacao extends Component {
     }
 
     onUpload = (idx, midias) => info => {
+        console.log(info);
         const { onOpenSnackbar } = this.props;
         if (info.file.status !== 'uploading') {
             //Adiciona

@@ -181,11 +181,11 @@ class Anatomp extends Component {
                                     <strong>Informações Gerais do Roteiro em Libras</strong>
                                     <FaHandPaper style={{ width: "34px", height: "36px", paddingBottom: "14px", color: "#1890ff" }} />
                                 </span>
-                                <div style={{ display: 'flex', justifyContent: 'space-evenly', height: '50%', marginBottom: '1px' }}>
+                                {/* <div style={{ display: 'flex', justifyContent: 'space-evenly', height: '50%', marginBottom: '1px' }}>
                                     <Apresentacao name={"Nome da Roteiro"} onChange={onChange('generalidades')} />
                                     <Apresentacao name={"Curso"} onChange={onChange('generalidades')} />
                                     <Apresentacao name={"Disciplina"} onChange={onChange('generalidades')} />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
 
