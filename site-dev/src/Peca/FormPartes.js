@@ -79,6 +79,7 @@ class FormPartes extends Component {
                                                     onChange={onChange('generalidades')} 
                                                     apagarDados={true}
                                                 />
+                                                <Icon style={{ marginTop: 4, cursor: 'pointer' }} type="close" onClick={onRemoveParte(p._id)} />
                                             </Col>
                                         )
                                     })}
