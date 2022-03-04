@@ -38,7 +38,7 @@ class FormItemApresentacao extends Component {
                 <div style={{ alignSelf: 'center' }}>
                     {item.midias.map((t, idxMidia) => <Fragment key={t._id}>
                         <Midia file={t} idx={idxMidia} midias={item.midias} onChange={onChange('midias', idx)} />
-                        </Fragment>)}
+                    </Fragment>)}
                     {loading == item._id ? <Spin /> : null}
                 </div>
             </div>
@@ -73,24 +73,27 @@ class Apresentacao extends Component {
 
     render() {
         const { loading, open, itens, sinalNovo } = this.state;
-        const { name } = this.props;
+        const { name, apagarDados } = this.props;
         return (
             <Fragment >
-                <List style={{marginRight:"10px"}}
+                <List style={{ marginRight: "10px" }}
                     rowKey='_id'
                     size="small"
                     bordered={true}
                     locale={{ emptyText: 'Nenhuma generalidade adicionada' }}
                     dataSource={itens}
+
                     renderItem={(item, idx) => (
-                        console.log(item),
+                        console.log(item, idx),
                         <Item key={item._id} actions={[
-                            <Upload showUploadList={false} onChange={this.onUpload(item._id, item.midias)} beforeUpload={this.beforeUpload(item._id)}>
+                            <Upload showUploadList={false} onChange={this.onUpload(idx, item.midias)} beforeUpload={this.beforeUpload(item._id)}>
                                 <Tooltip title='Adicionar mídia'>
                                     <Button type='primary' ghost shape='circle' icon='paper-clip' disabled={loading} />
                                 </Tooltip>
                             </Upload>,
-                            <Tooltip title='Excluir'><Button type='primary' ghost onClick={this.setItem2Delete(idx)} icon='delete' shape='circle' /></Tooltip>
+                            <Tooltip title='Excluir'>
+                                <Button type='primary' ghost onClick={this.setItem2Delete(idx)} icon='delete' shape='circle' />
+                            </Tooltip>
                         ]}>
                             <FormItemApresentacao name={name} sinalNovo={sinalNovo} onEnter={this.onAdd} loading={loading} item={item} idx={idx} onChange={this.onChange} />
                         </Item>)}
@@ -112,6 +115,15 @@ class Apresentacao extends Component {
 
     setItem2Delete = idx => () => this.setState({ open: true, toDelete: idx })
 
+    // chooseDelete(idx) {
+    //     const { itens } = this.state;
+    //     if (itens.midias.length > 0 && !this.apagarDados) {
+    //         this.setItem2Delete(idx);
+    //     } else {
+    //         this.onDelete();
+    //     }
+    // }
+
     onClose = () => this.setState({ open: false, toDelete: '' })
 
     onDelete = () => {
@@ -129,6 +141,7 @@ class Apresentacao extends Component {
             })
         }
     }
+
 
     onChange = (field, idx) => value => {
         const { itens } = this.state;
@@ -155,6 +168,7 @@ class Apresentacao extends Component {
     }
 
     beforeUpload = _id => () => {
+        console.log('Dispaara func');
         this.setState({ loading: _id })
         return false
     }

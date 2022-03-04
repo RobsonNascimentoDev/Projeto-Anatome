@@ -76,9 +76,10 @@ class FormPartes extends Component {
                                             <Col span={6} key={p._id} style={{ padding: 5, display: 'flex' }}>
                                                 <Apresentacao name={p.nome}
                                                     defaultValue={p}
-                                                    onChange={onChange('generalidades')}
+                                                    onChange={onChange('generalidades')} 
+                                                    apagarDados={true}
                                                 />
-                                            </Col>               
+                                            </Col>
                                         )
                                     })}
                                     {tokens.map((item, idx) => (
@@ -92,7 +93,6 @@ class FormPartes extends Component {
                                                 textOverflow: 'ellipsis'
                                             }}>{item}</Tag>
                                         </Col>
-
                                     ))}
                                     {partes.length == 0 && tokens.length == 0 && 'Esta peça ainda não possui partes associadas'}
                                 </Row>
