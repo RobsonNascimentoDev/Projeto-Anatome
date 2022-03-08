@@ -73,13 +73,15 @@ class FormPartes extends Component {
                                 <Row>
                                     {partes.map((p, idx) => {
                                         return (
-                                            <Col span={6} key={p._id} style={{ padding: 5, display: 'flex' }}>
-                                                <Apresentacao name={p.nome}
-                                                    defaultValue={p}
-                                                    onChange={onChange('generalidades')} 
-                                                    apagarDados={true}
-                                                />
-                                                <Icon style={{ marginTop: 4, cursor: 'pointer' }} type="close" onClick={onRemoveParte(p._id)} />
+                                            <Col span={6} key={p._id} style={{ padding: 2, display: 'flex', justifyItems:'space-between' }}>
+                                                <div style={{ width:'75%', margin: "0px 0px 20px 5px" }}>
+                                                    <Apresentacao name={p.nome}
+                                                        defaultValue={p}
+                                                        onChange={onChange('generalidades')}
+                                                        apagarDados={true}
+                                                    />
+                                                </div>
+                                                <Icon style={{height: '10%', cursor: 'pointer', border: "2px solid #e8e8e8", borderRadius: "5px", }} type="close" onClick={onRemoveParte(p._id)} />
                                             </Col>
                                         )
                                     })}
