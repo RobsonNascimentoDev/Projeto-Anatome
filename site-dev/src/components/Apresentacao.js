@@ -84,7 +84,6 @@ class Apresentacao extends Component {
                     dataSource={itens}
 
                     renderItem={(item, idx) => (
-                        console.log(item, idx),
                         <Item key={item._id} actions={[
                             <Upload showUploadList={false} onChange={this.onUpload(idx, item.midias)} beforeUpload={this.beforeUpload(item._id)}>
                                 <Tooltip title='Adicionar mídia'>
@@ -168,13 +167,11 @@ class Apresentacao extends Component {
     }
 
     beforeUpload = _id => () => {
-        console.log('Dispaara func');
         this.setState({ loading: _id })
         return false
     }
 
     onUpload = (idx, midias) => info => {
-        console.log(info);
         const { onOpenSnackbar } = this.props;
         if (info.file.status !== 'uploading') {
             //Adiciona
