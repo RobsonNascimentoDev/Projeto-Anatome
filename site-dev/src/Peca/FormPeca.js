@@ -14,7 +14,7 @@ const props = {
     wrapperCol: { span: 14 },
 }
 
-const FormPeca = ({ nome, idioma, regiao, sistema, erros, somentePratica, listaSistema, listaRegiao, onOpenSnackbar, onChange, onChangeSomentePratica, midiaLibras, generalidades }) => {
+const FormPeca = ({ nome, idioma, regiao, sistema, erros, somentePratica, listaSistema, listaRegiao, onOpenSnackbar, onChange, onChangeSomentePratica, generalidades, apresentacao }) => {
 
     const _erros = {
         nome: erros.campos.indexOf('nome'),
@@ -79,9 +79,9 @@ const FormPeca = ({ nome, idioma, regiao, sistema, erros, somentePratica, listaS
                                 <FaHandPaper style={{ width: "34px", height: "36px", paddingBottom: "14px", color: "#1890ff" }} />
                             </span>
                             <div style={{ display: 'flex', justifyContent: 'space-evenly', height: '50%', marginBottom: '1px' }}>
-                                <Apresentacao defaultValue={midiaLibras} name={"Nome da Peça"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('generalidades')} />
-                                <Apresentacao defaultValue={midiaLibras} name={"Região"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('generalidades')} />
-                                <Apresentacao defaultValue={midiaLibras} name={"Sistema"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('generalidades')} />
+                                <Apresentacao defaultValue={apresentacao} name={"Nome da Peça"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('apresentacao')} />
+                                {/* <Apresentacao defaultValue={apresentacao} name={"Região"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('apresentacao')} />
+                                <Apresentacao defaultValue={apresentacao} name={"Sistema"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('apresentacao')} /> */}
                             </div>
                         </FormItem>
                     </div>

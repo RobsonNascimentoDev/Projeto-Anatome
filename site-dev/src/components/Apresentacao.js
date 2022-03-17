@@ -7,12 +7,11 @@ import Midia from './Midia'
 const { v4: uuidv4 } = require('uuid');
 
 const { Item } = List;
-const FormItem = Form.Item;
 
 const firebase = window.firebase;
 const firebaseRef = firebase.storage().ref();
 
-const getModelGeneralidade = () => ({
+const getModelApresentacao = () => ({
     _id: uuidv4(),
     texto: '',
     midias: [],
@@ -33,17 +32,28 @@ class FormItemApresentacao extends Component {
         return (
             <div style={_style.item}>
                 <div style={_style.textos}>
-                    {this.props.name}
+                    {item.texto = this.props.name}
                 </div>
                 <div style={{ alignSelf: 'center' }}>
-                    {item.midias.map((t, idxMidia) => <Fragment key={t._id}>
-                        <Midia file={t} idx={idxMidia} midias={item.midias} onChange={onChange('midias', idx)} />
-                    </Fragment>)}
+                    {console.log(item)}
+                    {item.midias.map((t, idxMidia) =>
+                        <Fragment key={t._id}>
+                            <Midia
+                                file={t}
+                                idx={idxMidia}
+                                midias={item.midias}
+                                onChange={onChange('midias', idx)}
+                            />
+                        </Fragment>)}
                     {loading == item._id ? <Spin /> : null}
                 </div>
             </div>
         )
     }
+}
+
+FormItemApresentacao.defaultProps = {
+    placeholder: 'Apresentacao'
 }
 
 class Apresentacao extends Component {
@@ -52,18 +62,15 @@ class Apresentacao extends Component {
         sinalNovo: '',
         loading: false,
         open: false,
-        nome: '',
         toDelete: '',
-        itens: this.props.defaultValue.length > 0 ? this.props.defaultValue : [getModelGeneralidade()]
+        itens: this.props.defaultValue.length > 0 ? this.props.defaultValue : [getModelApresentacao()]
     }
-
 
     componentWillReceiveProps(next) {
         if (this.props.defaultValue.length == 0 && next.defaultValue.length > 0) {
             this.setState({ itens: next.defaultValue })
         }
     }
-
 
     componentWillUpdate(nextProps, nextState) {
         if (JSON.stringify(this.state.itens) != JSON.stringify(nextState.itens)) {
@@ -82,7 +89,6 @@ class Apresentacao extends Component {
                     bordered={true}
                     locale={{ emptyText: 'Nenhuma generalidade adicionada' }}
                     dataSource={itens}
-
                     renderItem={(item, idx) => (
                         <Item key={item._id} actions={[
                             <Upload showUploadList={false} onChange={this.onUpload(idx, item.midias)} beforeUpload={this.beforeUpload(item._id)}>
@@ -94,7 +100,7 @@ class Apresentacao extends Component {
                                 <Button type='primary' ghost onClick={this.setItem2Delete(idx)} icon='delete' shape='circle' />
                             </Tooltip>
                         ]}>
-                            <FormItemApresentacao name={name} sinalNovo={sinalNovo} onEnter={this.onAdd} loading={loading} item={item} idx={idx} onChange={this.onChange} />
+                            <FormItemApresentacao placeholder={this.props.placeholder} name={name} sinalNovo={sinalNovo} onEnter={this.onAdd} loading={loading} item={item} idx={idx} onChange={this.onChange} />
                         </Item>)}
                 />
                 <Modal
@@ -107,21 +113,30 @@ class Apresentacao extends Component {
                     okButtonProps={{ loading }}
                     cancelButtonProps={{ loading }}
                 >
+                    {this.getBody()}
                 </Modal>
             </Fragment>
         )
     }
 
-    setItem2Delete = idx => () => this.setState({ open: true, toDelete: idx })
+    getBody = () => {
+        const { toDelete, itens } = this.state;
 
-    // chooseDelete(idx) {
-    //     const { itens } = this.state;
-    //     if (itens.midias.length > 0 && !this.apagarDados) {
-    //         this.setItem2Delete(idx);
-    //     } else {
-    //         this.onDelete();
-    //     }
-    // }
+        if (toDelete !== '') {
+            return (
+                <div>
+                    <p>Deseja realmente excluir a generalidade:</p>
+                    <ul>
+                        {itens[toDelete].texto && <li>{itens[toDelete].texto}</li>}
+                    </ul>
+                </div>
+            )
+        } else {
+            return null
+        }
+    }
+
+    setItem2Delete = idx => () => this.setState({ open: true, toDelete: idx })
 
     onClose = () => this.setState({ open: false, toDelete: '' })
 
@@ -130,7 +145,7 @@ class Apresentacao extends Component {
         this.onClose();
 
         if (itens.length == 1) {
-            this.setState({ itens: [getModelGeneralidade()] })
+            this.setState({ itens: [getModelApresentacao()] })
         } else {
             this.setState({
                 itens: [
@@ -140,7 +155,6 @@ class Apresentacao extends Component {
             })
         }
     }
-
 
     onChange = (field, idx) => value => {
         const { itens } = this.state;
@@ -161,7 +175,7 @@ class Apresentacao extends Component {
             sinalNovo: + new Date(),
             itens: [
                 ...itens,
-                getModelGeneralidade(),
+                getModelApresentacao(),
             ]
         })
     }
@@ -223,7 +237,7 @@ const _style = {
 
 
 Apresentacao.defaultProps = {
-    defaultValue: [getModelGeneralidade()]
+    defaultValue: [getModelApresentacao()]
 }
 
 export default Apresentacao;

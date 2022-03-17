@@ -53,8 +53,8 @@ class Peca extends Component {
             regiao: '1',
             partes: [],
             conteudoTeorico: [getModelConteudoTeorico()],
-            generalidades: []
-            
+            generalidades: [],
+            apresentacao: []
         },
         options: {
             listaSistema,
@@ -271,7 +271,6 @@ class Peca extends Component {
     onSave = () => {
         const { onOpenSnackbar, onSetAppState, onClose, onPush } = this.props;
         const { model } = this.state;
-
         const erros = this.onValidate();
 
         if (erros.campos.length > 0) {

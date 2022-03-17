@@ -79,7 +79,11 @@ const MidiaContent = ({ file, onChange, midias, idx }) => {
 }
 
 
-const Midia = ({key, file, idx, midias, onChange}) => <Popover key={key} content={<MidiaContent file={file} idx={idx} midias={midias} onChange={onChange} />} title={file.name}><Button style={{ marginRight: 3 }} shape='circle' icon={getMediaIcon(file.type)} /></Popover>
+const Midia = ({key, file, idx, midias, onChange}) => 
+    <Popover key={key} 
+            content={<MidiaContent file={file} idx={idx} midias={midias} onChange={onChange} />} 
+            title={file.name}>
+                <Button style={{ marginRight: 3 }} shape='circle' icon={getMediaIcon(file.type)} /></Popover>
 
 
 export default Midia;

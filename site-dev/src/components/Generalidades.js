@@ -37,7 +37,21 @@ class FormItemGeneralidade extends Component {
                     <Input ref={r => this.ref = r} onPressEnter={onEnter} value={item.texto} onChange={e => onChange('texto', idx)(e.target.value)} placeholder={placeholder} />
                 </div>
                 <div style={{ alignSelf: 'center' }}>
-                    {item.midias.map((t, idxMidia) => <Fragment key={t._id}><Midia file={t} idx={idxMidia} midias={item.midias} onChange={onChange('midias', idx)} /></Fragment>)}
+                    {console.log(item)}
+                    {item.midias.map((t, idxMidia) => 
+                        <Fragment key={t._id}>
+                            {/* <Midia file={t} idx={idxMidia} midias={item.midias} onChange={onChange('midias', idx)} /> */}
+                            {/* <Fragment key={t._id}> */}
+                            <Midia 
+                                file={t} 
+                                idx={idxMidia} 
+                                midias={item.midias} 
+                                onChange={onChange('midias', idx)}
+                             />
+                        </Fragment>)}
+
+                        
+                        {/* </Fragment>)} */}
                     {loading == item._id ? <Spin /> : null}
                 </div>
             </div>
@@ -65,13 +79,11 @@ class Generalidades extends Component {
         }
     }
 
-
     componentWillUpdate(nextProps, nextState) {
         if (JSON.stringify(this.state.itens) != JSON.stringify(nextState.itens)) {
             this.props.onChange(nextState.itens)
         }
     }
-
 
     render() {
         const { loading, open, itens, sinalNovo } = this.state;
@@ -91,7 +103,9 @@ class Generalidades extends Component {
                                     <Button type='primary' ghost shape='circle' icon='paper-clip' disabled={loading} />
                                 </Tooltip>
                             </Upload>,
-                            <Tooltip title='Excluir'><Button type='primary' ghost onClick={this.setItem2Delete(idx)} icon='delete' shape='circle' /></Tooltip>
+                            <Tooltip title='Excluir'>
+                                <Button type='primary' ghost onClick={this.setItem2Delete(idx)} icon='delete' shape='circle' />
+                            </Tooltip>
                         ]}>
                             <FormItemGeneralidade placeholder={this.props.placeholder} sinalNovo={sinalNovo} onEnter={this.onAdd} loading={loading} item={item} idx={idx} onChange={this.onChange} />
                         </Item>)}
