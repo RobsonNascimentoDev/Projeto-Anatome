@@ -4,6 +4,9 @@ import { filter } from '../utils/data';
 import Generalidades from '../components/Generalidades';
 import Apresentacao from '../components/Apresentacao';
 import { FaHandPaper } from "@react-icons/all-files/fa/FaHandPaper";
+import NomeMidia from '../components/PecaComponents/NomeMidia';
+import RegiaoMidia from '../components/PecaComponents/RegiaoMidia';
+import SistemaMidia from '../components/PecaComponents/SistemaMidia';
 
 const Option = Select.Option;
 
@@ -14,7 +17,7 @@ const props = {
     wrapperCol: { span: 14 },
 }
 
-const FormPeca = ({ nome, idioma, regiao, sistema, erros, somentePratica, listaSistema, listaRegiao, onOpenSnackbar, onChange, onChangeSomentePratica, generalidades, apresentacao }) => {
+const FormPeca = ({ nome, idioma, regiao, sistema, erros, somentePratica, listaSistema, listaRegiao, onOpenSnackbar, onChange, onChangeSomentePratica, generalidades, nomeMidia, regiaoMidia, sistemaMidia }) => {
 
     const _erros = {
         nome: erros.campos.indexOf('nome'),
@@ -79,9 +82,9 @@ const FormPeca = ({ nome, idioma, regiao, sistema, erros, somentePratica, listaS
                                 <FaHandPaper style={{ width: "34px", height: "36px", paddingBottom: "14px", color: "#1890ff" }} />
                             </span>
                             <div style={{ display: 'flex', justifyContent: 'space-evenly', height: '50%', marginBottom: '1px' }}>
-                                <Apresentacao defaultValue={apresentacao} name={"Nome da Peça"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('apresentacao')} />
-                                {/* <Apresentacao defaultValue={apresentacao} name={"Região"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('apresentacao')} />
-                                <Apresentacao defaultValue={apresentacao} name={"Sistema"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('apresentacao')} /> */}
+                                <NomeMidia defaultValue={nomeMidia} name={"Nome da Peça"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('nomeMidia')} />
+                                <RegiaoMidia defaultValue={regiaoMidia} name={"Nome da Região"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('regiaoMidia')} />
+                                <SistemaMidia defaultValue={sistemaMidia} name={"Nome do Sistema"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('sistemaMidia')} />
                             </div>
                         </FormItem>
                     </div>

@@ -75,7 +75,6 @@ app.post('/peca', (req, res) => {
     var peca = req.body;
     var partes = req.body.partes.map(c => new Parte(c));
     var conteudo = req.body.conteudoTeorico.map(c => new ConteudoTeorico(c));
-    console.log(req.body)
     //Salva as partes das peças
     Parte.collection.insert(partes, (err, partes) => {
         if (err) return res.status(500).send({status: 500, error: err});

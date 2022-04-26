@@ -3,6 +3,9 @@ var Schema = mongoose.Schema;
 
 var esquemaGeneralidade = require('../schemas/generalidade');
 var esquemaApresentacao = require('../schemas/apresentacao');
+var esquemaNomeMidia = require('../schemas/nomeMidia');
+var esquemaRegiaoMidia = require('../schemas/regiaoMidia');
+var esquemaSistemaMidia = require('../schemas/sistemaMidia');
 
 var esquemaPeca = new Schema({
     _id: String,
@@ -12,7 +15,9 @@ var esquemaPeca = new Schema({
     partes: [{ type: String, ref: 'Parte' }],
     conteudoTeorico: [{ type: String, ref: 'ConteudoTeorico' }],
     generalidades: [esquemaGeneralidade],
-    apresentacao: [esquemaApresentacao]
+    nomeMidia: esquemaNomeMidia,
+    regiaoMidia: esquemaRegiaoMidia,
+    sistemaMidia: esquemaSistemaMidia
 }, {_id: false});
 
 
