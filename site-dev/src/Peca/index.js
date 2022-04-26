@@ -54,7 +54,9 @@ class Peca extends Component {
             partes: [],
             conteudoTeorico: [getModelConteudoTeorico()],
             generalidades: [],
-            apresentacao: []
+            nomeMidia: [],
+            regiaoMidia: [],
+            sistemaMidia: []
         },
         options: {
             listaSistema,
