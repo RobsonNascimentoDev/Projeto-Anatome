@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var esquemaMidia = require('./midia')
+var esquemaMidia = require('../midia')
 
-var esquemaRegiaoMidia = new Schema({
+var esquemaSistemaMidia = new Schema({
     _id: String,
     midias: [esquemaMidia],
     texto: String,
 }, {_id: false});  
 
-module.exports = esquemaRegiaoMidia;
+module.exports = esquemaSistemaMidia;

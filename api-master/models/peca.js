@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var esquemaGeneralidade = require('../schemas/generalidade');
-var esquemaNomeMidia = require('../schemas/nomeMidia');
-var esquemaRegiaoMidia = require('../schemas/regiaoMidia');
-var esquemaSistemaMidia = require('../schemas/sistemaMidia');
+var esquemaNomeMidia = require('../schemas/PecaSchema/nomeMidia');
+var esquemaRegiaoMidia = require('../schemas/PecaSchema/regiaoMidia');
+var esquemaSistemaMidia = require('../schemas/PecaSchema/sistemaMidia');
 
 var esquemaPeca = new Schema({
     _id: String,

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var esquemaMidia = require('./midia')
+var esquemaMidia = require('../midia')
 
 var esquemaNomeMidia = new Schema({
     _id: String,

@@ -82,9 +82,9 @@ const FormPeca = ({ nome, idioma, regiao, sistema, erros, somentePratica, listaS
                                 <FaHandPaper style={{ width: "34px", height: "36px", paddingBottom: "14px", color: "#1890ff" }} />
                             </span>
                             <div style={{ display: 'flex', justifyContent: 'space-evenly', height: '50%', marginBottom: '1px' }}>
-                                <NomeMidia defaultValue={nomeMidia} name={"Sinal Termo Nome"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('nomeMidia')} />
-                                <RegiaoMidia defaultValue={regiaoMidia} name={"Sinal Termo Região"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('regiaoMidia')} />
-                                <SistemaMidia defaultValue={sistemaMidia} name={"Sinal Termo Sistema"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('sistemaMidia')} />
+                                <NomeMidia defaultValue={nomeMidia} name={"Nome da Peça"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('nomeMidia')} />
+                                <RegiaoMidia defaultValue={regiaoMidia} name={"Região da Peça"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('regiaoMidia')} />
+                                <SistemaMidia defaultValue={sistemaMidia} name={"Sistema da Peça"} onOpenSnackBar={onOpenSnackbar} onChange={onChange('sistemaMidia')} />
                             </div>
                         </FormItem>
                     </div>

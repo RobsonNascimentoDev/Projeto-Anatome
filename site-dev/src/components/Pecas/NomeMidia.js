@@ -35,7 +35,6 @@ class FormNomeMidia extends Component {
                     {item.texto = this.props.name}
                 </div>
                 <div style={{ alignSelf: 'center' }}>
-                    {console.log(item)}
                     {item.midias.map((t, idxMidia) =>
                         <Fragment key={t._id}>
                             <Midia

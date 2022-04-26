@@ -37,7 +37,6 @@ class FormItemGeneralidade extends Component {
                     <Input ref={r => this.ref = r} onPressEnter={onEnter} value={item.texto} onChange={e => onChange('texto', idx)(e.target.value)} placeholder={placeholder} />
                 </div>
                 <div style={{ alignSelf: 'center' }}>
-                    {console.log(item)}
                     {item.midias.map((t, idxMidia) => 
                         <Fragment key={t._id}>
                             {/* <Midia file={t} idx={idxMidia} midias={item.midias} onChange={onChange('midias', idx)} /> */}
